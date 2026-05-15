@@ -255,12 +255,7 @@ async function register() {
             btn.disabled  = false;
             btn.innerHTML = '<i class="fa fa-user-plus"></i> &nbsp;SIGN UP';
         }
-    } catch (err) {
-        errEl.innerText = "⚠️ Cannot connect to server. Make sure XAMPP is running.";
-        errEl.style.display = "block";
-        btn.disabled  = false;
-        btn.innerHTML = '<i class="fa fa-user-plus"></i> &nbsp;SIGN UP';
-    }
+    } 
 }
 </script>
 </body>

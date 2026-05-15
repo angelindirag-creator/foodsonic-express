@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FoodSonic Express - Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background-color: #8B2500;
+        }
+
+        .bg-pattern {
+            position: fixed; inset: 0;
+            background-image: url('images/logoo.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .bg-overlay {
+            position: fixed; inset: 0;
+            background: rgba(60, 10, 0, 0.60);
+            z-index: 1;
+        }
+
+        .logo-top {
+            position: absolute; top: 22px; left: 28px;
+            display: flex; align-items: center; gap: 10px;
+            color: white; text-decoration: none; z-index: 10;
+        }
+
+        .logo-img-wrap {
+            width: 52px; height: 52px; border-radius: 50%;
+            background: #fff; display: flex; align-items: center;
+            justify-content: center; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .logo-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .brand-name { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #FFD580; line-height: 1.1; }
+        .brand-sub { font-size: 0.7rem; color: rgba(255,255,255,0.75); letter-spacing: 2px; text-transform: uppercase; }
+
+        .container {
+            position: relative; z-index: 5;
+            width: 100%; max-width: 550px; padding: 20px;
+        }
+
+        .card {
+            background: rgba(255,250,240,0.97);
+            border-radius: 32px;
+            padding: 40px 40px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+            color: #3a1a00;
+            position: relative; overflow: hidden;
+        }
+
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #E8451A, #FF8C00, #FFD580, #FF8C00, #E8451A);
+        }
+
+        .logo-circle {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: #FFF3E0; border: 3px solid #FFD580;
+            margin: 0 auto 16px;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; font-size: 2.4rem;
+        }
+
+        .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
+
+        h2 {
+            text-align: center; font-family: 'Fredoka One', cursive;
+            font-size: 1.9rem; color: #E8451A; margin-bottom: 4px;
+        }
+
+        .subtitle {
+            text-align: center; color: #9b6a3a;
+            font-size: 0.88rem; margin-bottom: 24px; font-weight: 700;
+        }
+
+        .input-group { position: relative; margin-bottom: 14px; }
+
+        .input-group i {
+            position: absolute; left: 15px; top: 50%;
+            transform: translateY(-50%); color: #E8451A; font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%; padding: 12px 14px 12px 42px;
+            background: #FFF8F0; border: 2px solid #FFD5B0;
+            border-radius: 12px; color: #3a1a00;
+            font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 600;
+            outline: none; transition: 0.3s;
+        }
+
+        .input-group input::placeholder { color: #c9956a; font-weight: 400; }
+        .input-group input:focus {
+            border-color: #E8451A; background: #fff;
+            box-shadow: 0 0 0 3px rgba(232,69,26,0.1);
+        }
+
+        .btn-main {
+            width: 100%; padding: 13px;
+            background: linear-gradient(135deg, #E8451A 0%, #FF7043 100%);
+            color: white; border: none; border-radius: 12px;
+            font-family: 'Fredoka One', cursive; font-size: 1.1rem;
+            cursor: pointer; transition: 0.3s; margin-top: 6px;
+            box-shadow: 0 6px 20px rgba(232,69,26,0.35);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(232,69,26,0.45);
+        }
+
+        .bottom-link {
+            text-align: center; margin-top: 18px;
+            color: #9b6a3a; font-size: 0.87rem; font-weight: 600;
+        }
+
+        .bottom-link a { color: #E8451A; font-weight: 800; text-decoration: none; }
+        .bottom-link a:hover { text-decoration: underline; }
+
+        .error-msg {
+            background: rgba(220,53,69,0.1); color: #c0392b;
+            border: 1px solid rgba(220,53,69,0.3); border-radius: 10px;
+            padding: 10px 14px; font-size: 0.85rem; margin-bottom: 14px;
+            display: none; font-weight: 700;
+        }
+
+        .success-msg {
+            background: rgba(39,174,96,0.1); color: #1e8449;
+            border: 1px solid rgba(39,174,96,0.3); border-radius: 10px;
+            padding: 10px 14px; font-size: 0.85rem; margin-bottom: 14px;
+            display: none; font-weight: 700;
+        }
+    </style>
+    <script src="config.js"></script>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+<div class="bg-overlay"></div>
+
+<a href="login.html" class="logo-top">
+    <div class="logo-img-wrap">
+        <img src="images/logoo.jpg" alt="Logo" onerror="this.parentElement.innerHTML='🍕'">
+    </div>
+    <div>
+        <div class="brand-name">FoodSonic</div>
+        <div class="brand-sub">Express</div>
+    </div>
+</a>
+
+<div class="container">
+    <div class="card">
+        <div class="logo-circle">
+            <img src="images/logoo.jpg" alt="Logo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <span style="display:none">🍕</span>
+        </div>
+
+        <h2>Create Account</h2>
+        <p class="subtitle">🍔 Join FoodSonic Express today!</p>
+
+        <div class="error-msg" id="errorMsg"></div>
+        <div class="success-msg" id="successMsg"></div>
+
+        <div class="input-group">
+            <i class="fa fa-user"></i>
+            <input type="text" id="regName" placeholder="Full name" required>
+        </div>
+        <div class="input-group">
+            <i class="fa fa-envelope"></i>
+            <input type="email" id="regEmail" placeholder="Email address" required>
+        </div>
+        <div class="input-group">
+            <i class="fa fa-lock"></i>
+            <input type="password" id="regPassword" placeholder="Password (min. 6 characters)" required>
+        </div>
+        <div class="input-group">
+            <i class="fa fa-lock"></i>
+            <input type="password" id="regConfirm" placeholder="Confirm password" required>
+        </div>
+
+        <button class="btn-main" onclick="register()">
+            <i class="fa fa-user-plus"></i> &nbsp;SIGN UP
+        </button>
+
+        <div class="bottom-link">
+            Already have an account? <a href="login.html">Login here</a>
+        </div>
+    </div>
+</div>
+
+<script>
+async function register() {
+    const name     = document.getElementById("regName").value.trim();
+    const email    = document.getElementById("regEmail").value.trim();
+    const password = document.getElementById("regPassword").value;
+    const confirm  = document.getElementById("regConfirm").value;
+    const errEl    = document.getElementById("errorMsg");
+    const okEl     = document.getElementById("successMsg");
+    const btn      = document.querySelector(".btn-main");
+
+    errEl.style.display = "none";
+    okEl.style.display  = "none";
+
+    // ── Client-side checks ────────────────────────────────────
+    if (!name || !email || !password || !confirm) {
+        errEl.innerText = "⚠️ Please fill in all fields.";
+        errEl.style.display = "block"; return;
+    }
+    if (password.length < 6) {
+        errEl.innerText = "⚠️ Password must be at least 6 characters.";
+        errEl.style.display = "block"; return;
+    }
+    if (password !== confirm) {
+        errEl.innerText = "⚠️ Passwords do not match.";
+        errEl.style.display = "block"; return;
+    }
+
+    // ── Call backend ──────────────────────────────────────────
+    btn.disabled   = true;
+    btn.innerText  = "Creating account...";
+
+    try {
+        const res  = await fetch(`${API_BASE_URL}api/register.php`, {
+            method:  "POST",
+            headers: { "Content-Type": "application/json" },
+            body:    JSON.stringify({ fullname: name, email, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+            okEl.innerText = "✅ Account created! Redirecting to login...";
+            okEl.style.display = "block";
+            setTimeout(() => { window.location.href = "login.html"; }, 1800);
+        } else {
+            errEl.innerText = "⚠️ " + data.message;
+            errEl.style.display = "block";
+            btn.disabled  = false;
+            btn.innerHTML = '<i class="fa fa-user-plus"></i> &nbsp;SIGN UP';
+        }
+    } catch (err) {
+        errEl.innerText = "⚠️ Cannot connect to server. Make sure XAMPP is running.";
+        errEl.style.display = "block";
+        btn.disabled  = false;
+        btn.innerHTML = '<i class="fa fa-user-plus"></i> &nbsp;SIGN UP';
+    }
+}
+</script>
+</body>
+</html>
